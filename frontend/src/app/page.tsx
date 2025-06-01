@@ -117,7 +117,7 @@ const LandingPage = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2">
-                    Apply Now <ChevronRight className="w-5 h-5" />
+                    Apply Now! <ChevronRight className="w-5 h-5" />
                   </button>
                   <button 
                     onClick={() => setIsVideoPlaying(true)}
