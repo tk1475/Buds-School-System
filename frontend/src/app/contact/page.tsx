@@ -52,18 +52,18 @@ const ContactPage = () => {
       type: 'general',
       title: 'General Inquiry',
       description: 'Ask about our school, programs, or any general questions',
-      message: 'Hello! I would like to know more about Buds School.'
+      message: 'Hello! I would like to know more about Buds School System.'
     },
     {
       type: 'admissions',
       title: 'Admissions',
       description: 'Inquire about enrollment, application process, and requirements',
-      message: 'Hi! I am interested in admission to Buds School. Could you please provide me with information about the enrollment process?'
+      message: 'Hello! I am interested in admission to Buds School System. Could you please provide me with information about the enrollment process?'
     },
     
   ];
 
-  const handleWhatsAppClick = (message) => {
+  const handleWhatsAppClick = (message: string) => {
     const phoneNumber = '923015046999'; // WhatsApp number (without + sign)
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
