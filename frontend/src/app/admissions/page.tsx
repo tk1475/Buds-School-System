@@ -33,7 +33,7 @@ const AdmissionsPage = () => {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const admissionSteps = [
     {
@@ -108,7 +108,7 @@ const AdmissionsPage = () => {
   }, [messages]);
 
   // Simulated chatbot response - this would connect to your LLM API
-  const getBotResponse = async (userMessage) => {
+  const getBotResponse = async (userMessage: string) => {
     setIsTyping(true);
     
     // Simulate API call delay
@@ -160,7 +160,7 @@ const AdmissionsPage = () => {
     setMessages(prev => [...prev, botMessage]);
   };
 
-  const handleQuickQuestion = (question) => {
+  const handleQuickQuestion = (question : string) => {
     setInputMessage(question);
   };
 
