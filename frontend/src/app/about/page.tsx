@@ -29,17 +29,17 @@ const AboutPage = () => {
 
   const milestones = [
     {
-      year: "1995",
+      year: "2005",
       title: "Foundation",
       description: "Buds School was established with a vision to provide quality education in Rawalpindi"
     },
     {
-      year: "2000",
+      year: "2006",
       title: "Expansion",
       description: "Extended to secondary education and introduced modern teaching methodologies"
     },
     {
-      year: "2005",
+      year: "2008",
       title: "Technology Integration",
       description: "Became one of the first schools in the region to integrate digital learning"
     },
