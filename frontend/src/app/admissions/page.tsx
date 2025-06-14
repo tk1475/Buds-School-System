@@ -56,7 +56,7 @@ const AdmissionsPage = () => {
     },
 
     {
-      step: 5,
+      step: 4,
       title: "Admission Decision",
       description: "Receive admission decision within 7-10 working days of completing all steps.",
       icon: CheckCircle
@@ -65,35 +65,19 @@ const AdmissionsPage = () => {
 
   const feeStructure = [
     {
-      grade: "Pre-School (Ages 3-4)",
-      monthlyFee: "PKR 8,000",
-      admissionFee: "PKR 15,000",
+      grade: "Grade Pre-Nursery -  6",
+      monthlyFee: "PKR 4,000",
+      admissionFee: "PKR 10,000",
       annualFee: "PKR 5,000"
     },
+
     {
-      grade: "Prep - Grade 2",
-      monthlyFee: "PKR 12,000",
-      admissionFee: "PKR 20,000",
-      annualFee: "PKR 8,000"
-    },
-    {
-      grade: "Grade 3 - 5",
-      monthlyFee: "PKR 15,000",
-      admissionFee: "PKR 25,000",
+      grade: "Grade 6 - 10",
+      monthlyFee: "PKR 4,500",
+      admissionFee: "PKR 10,000",
       annualFee: "PKR 10,000"
     },
-    {
-      grade: "Grade 6 - 8",
-      monthlyFee: "PKR 18,000",
-      admissionFee: "PKR 30,000",
-      annualFee: "PKR 12,000"
-    },
-    {
-      grade: "Grade 9 - 10 (Matric)",
-      monthlyFee: "PKR 22,000",
-      admissionFee: "PKR 35,000",
-      annualFee: "PKR 15,000"
-    }
+   
   ];
 
   const requirements = [
