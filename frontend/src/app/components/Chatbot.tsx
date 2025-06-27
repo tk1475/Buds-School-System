@@ -115,7 +115,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimizeToggle, is
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    setMessages((prev: Message[]) => [...prev, userMessage]);
     setInputMessage('');
 
     const ragResponse = await getBotResponse(inputMessage);
@@ -129,7 +129,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimizeToggle, is
       confidence: ragResponse.confidence,
     };
 
-    setMessages((prev) => [...prev, botMessage]);
+    setMessages((prev: Message[]) => [...prev, botMessage]);
   };
 
   const handleQuickQuestion = (question: string) => {
@@ -145,7 +145,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimizeToggle, is
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <div
-        className={`bg-white rounded-2xl shadow-2xl border border-gray-200 transition-all ${
+        className={`bg-white rounded-2xl shadow-2xl border border-gray-200 transition-all flex flex-col ${
           isMinimized ? 'w-80 h-16' : 'w-96 h-[600px]'
         }`}
       >
@@ -272,7 +272,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimizeToggle, is
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   placeholder="Ask about admissions, fees, documents..."
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm"
+                  className="text-black flex-1 px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-700 focus:border-blue-500 outline-none text-sm"
                 />
                 <button
                   onClick={handleSendMessage}

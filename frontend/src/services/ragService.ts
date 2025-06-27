@@ -52,6 +52,20 @@ export class RAGService {
    */
   public async generateResponse(userQuestion: string): Promise<RAGResponse> {
     try {
+      // Special case: location/address queries
+      const locationKeywords = ['location', 'address', 'where', 'find', 'directions', 'map', 'locate', 'site', 'venue', 'place'];
+      const userQuestionLower = userQuestion.toLowerCase();
+      if (locationKeywords.some(keyword => userQuestionLower.includes(keyword))) {
+        // Find the address/location entry
+        const addressDoc = searchKnowledgeBase('location').find(doc => doc.id === 'school-info-3');
+        if (addressDoc) {
+          return {
+            answer: addressDoc.content,
+            sources: [addressDoc],
+            confidence: 1,
+          };
+        }
+      }
       // Step 1: Retrieve relevant documents
       const relevantDocs = this.retrieveDocuments(userQuestion);
       

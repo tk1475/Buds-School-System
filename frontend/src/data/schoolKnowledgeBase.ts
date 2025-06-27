@@ -120,6 +120,12 @@ export const schoolKnowledgeBase: SchoolDocument[] = [
     category: 'general',
     tags: ['quality education', 'academic excellence', 'character development', 'holistic growth'],
   },
+  {
+    id: 'school-info-3',
+    content: 'Buds School is located at New AECHS Rd, Sector 2 Airport Employees CHS, Rawalpindi. The exact address is Airport Employees CHS, House No. 232/15, Rawalpindi, Pakistan.',
+    category: 'location',
+    tags: ['location', 'address', 'map', 'campus', 'where', 'school location', 'directions', 'find', 'place', 'site', 'locate', 'venue'],
+  },
 
   // Assessment Information
   {
@@ -141,8 +147,12 @@ export const schoolKnowledgeBase: SchoolDocument[] = [
 // Search function for RAG implementation
 export const searchKnowledgeBase = (query: string): SchoolDocument[] => {
   const searchTerms = query.toLowerCase().split(' ');
-  
-  return schoolKnowledgeBase.filter(doc => {
+
+  // Special handling for location/address queries
+  const locationKeywords = ['location', 'address', 'where', 'find', 'directions', 'map', 'locate', 'site', 'venue', 'place', 'campus', 'school location', 'directions', 'find', 'place', 'site', 'locate', 'venue'];
+  const isLocationQuery = searchTerms.some(term => locationKeywords.includes(term));
+
+  let results = schoolKnowledgeBase.filter(doc => {
     const contentMatch = searchTerms.some(term => 
       doc.content.toLowerCase().includes(term)
     );
@@ -152,9 +162,25 @@ export const searchKnowledgeBase = (query: string): SchoolDocument[] => {
     const categoryMatch = searchTerms.some(term => 
       doc.category.toLowerCase().includes(term)
     );
-    
     return contentMatch || tagMatch || categoryMatch;
-  }).sort((a, b) => {
+  });
+
+  // If it's a location query, boost the address/location entry to the top
+  if (isLocationQuery) {
+    const addressDocIndex = results.findIndex(doc => doc.id === 'school-info-3');
+    if (addressDocIndex > -1) {
+      const [addressDoc] = results.splice(addressDocIndex, 1);
+      results.unshift(addressDoc);
+    } else {
+      // If not in results, check if it's in the KB and add it
+      const addressDoc = schoolKnowledgeBase.find(doc => doc.id === 'school-info-3');
+      if (addressDoc) {
+        results.unshift(addressDoc);
+      }
+    }
+  }
+
+  return results.sort((a, b) => {
     // Simple relevance scoring - documents with more matching terms rank higher
     const aScore = searchTerms.filter(term => 
       a.content.toLowerCase().includes(term) || 
@@ -164,7 +190,6 @@ export const searchKnowledgeBase = (query: string): SchoolDocument[] => {
       b.content.toLowerCase().includes(term) || 
       b.tags.some((tag: string) => tag.toLowerCase().includes(term))
     ).length;
-    
     return bScore - aScore;
   });
 }; 
