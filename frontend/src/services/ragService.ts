@@ -1,17 +1,13 @@
-import { ChatOpenAI } from '@langchain/openai';
+import Together from "together-ai";
 import { PromptTemplate } from '@langchain/core/prompts';
 import { searchKnowledgeBase, SchoolDocument } from '../data/schoolKnowledgeBase';
 
 // Initialize the language model with server-side environment variables
-const llm = new ChatOpenAI({
-  modelName: 'gpt-3.5-turbo',
-  temperature: 0.7,
-  openAIApiKey: process.env.OPENAI_API_KEY, // Server-side environment variable
-});
+const together = new Together(); // auth defaults to process.env.LLAMA3_API_KEY or TOGETHER_API_KEY
 
 // Create a prompt template for the RAG system
 const ragPromptTemplate = PromptTemplate.fromTemplate(`
-You are a helpful admissions assistant for Buds School. Use the following context to answer the user's question accurately and helpfully.
+System: You are a helpful admissions assistant for Buds School. Use the following context to answer the user's question accurately and helpfully.
 
 Context Information:
 {context}
@@ -27,7 +23,8 @@ Instructions:
 6. If asked about dates, provide exact dates from the context
 7. If asked about documents, list all required documents from the context
 
-Answer: `);
+Answer:
+`);
 
 export interface RAGResponse {
   answer: string;
@@ -121,23 +118,38 @@ export class RAGService {
    */
   private async generateLLMResponse(question: string, context: string): Promise<string> {
     try {
-      // Check if OpenAI API key is available
-      if (!process.env.OPENAI_API_KEY) {
-        console.warn('OpenAI API key not found, using fallback response');
+      if (!process.env.LLAMA3_API_KEY && !process.env.TOGETHER_API_KEY) {
+        console.warn('Llama 3 API key not found, using fallback response');
         return this.generateFallbackResponse(question, context);
       }
 
-      const formattedPrompt = await ragPromptTemplate.format({
-        context,
-        question,
+      // Compose the prompt as a chat message
+      const messages: Array<{ role: "system" | "user" | "assistant"; content: string }> = [
+        {
+          role: "system",
+          content: "You are a helpful admissions assistant for Buds School. Use the following context to answer the user's question accurately and helpfully. Context: " + context
+        },
+        {
+          role: "user",
+          content: question
+        }
+      ];
+
+      // Use a model available to your account, e.g., 'meta-llama/Llama-3-8b-chat-hf' or another from TogetherAI's model list
+      const response = await together.chat.completions.create({
+        messages,
+        model: "meta-llama/Llama-3-8b-chat-hf", // Change if you have access to a different model
+        temperature: 0.7,
+        max_tokens: 1024
       });
 
-      const response = await llm.invoke(formattedPrompt);
-      return response.content as string;
+      const messageContent = response.choices?.[0]?.message?.content;
+      if (!messageContent) {
+        throw new Error("No content returned from TogetherAI response");
+      }
+      return messageContent;
     } catch (error) {
       console.error('Error calling LLM:', error);
-      
-      // Fallback to rule-based response if LLM fails
       return this.generateFallbackResponse(question, context);
     }
   }
