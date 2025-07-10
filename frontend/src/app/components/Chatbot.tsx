@@ -15,13 +15,13 @@ interface Message {
   text: string;
   sender: 'user' | 'bot';
   timestamp: Date;
-  sources?: any[];
+  sources?: unknown[];
   confidence?: number;
 }
 
 interface RAGResponse {
   answer: string;
-  sources: any[];
+  sources: unknown[];
   confidence: number;
 }
 
@@ -220,11 +220,22 @@ const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose, onMinimizeToggle, is
                    showSources === message.id && (
                     <div className="mt-2 ml-4 bg-blue-50 rounded-lg p-3">
                       <div className="text-xs font-semibold text-blue-800 mb-2">Sources:</div>
-                      {message.sources.map((source, index) => (
-                        <div key={index} className="text-xs text-blue-700 mb-1">
-                          <span className="font-medium">{source.category}:</span> {source.content}
-                        </div>
-                      ))}
+                      {message.sources.map((source, index) => {
+                        if (
+                          typeof source === 'object' &&
+                          source !== null &&
+                          'category' in source &&
+                          'content' in source
+                        ) {
+                          const typedSource = source as { category: string; content: string };
+                          return (
+                            <div key={index} className="text-xs text-blue-700 mb-1">
+                              <span className="font-medium">{typedSource.category}:</span> {typedSource.content}
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
                     </div>
                   )}
                 </div>

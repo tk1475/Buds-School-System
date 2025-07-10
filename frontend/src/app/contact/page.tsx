@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   MapPin, 
   Phone, 
@@ -77,7 +77,7 @@ const ContactPage = () => {
             Get in Touch
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
-            We're here to answer your questions and help you discover how Buds School can nurture your child's potential.
+            We&apos;re here to answer your questions and help you discover how Buds School can nurture your child&apos;s potential.
           </p>
         </div>
       </section>
@@ -252,7 +252,7 @@ const ContactPage = () => {
             Ready to Visit Our Campus?
           </h2>
           <p className="text-xl text-blue-100 mb-10">
-            Schedule a personalized tour and see why Buds School is the perfect place for your child's education.
+            Schedule a personalized tour and see why Buds School is the perfect place for your child&apos;s education.
           </p>
           <button className="bg-white text-blue-600 hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
             Schedule a Campus Tour

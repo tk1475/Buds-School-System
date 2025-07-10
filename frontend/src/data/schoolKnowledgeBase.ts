@@ -3,7 +3,7 @@ export interface SchoolDocument {
   content: string;
   category: string;
   tags: string[];
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export const schoolKnowledgeBase: SchoolDocument[] = [

@@ -154,7 +154,7 @@ const LandingPage = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-5xl font-bold text-gray-800 mb-8 leading-tight">
-                Shaping Tomorrow's Leaders Today
+                Shaping Tomorrow&apos;s Leaders Today
               </h2>
               <p className="text-xl text-gray-600 mb-10 leading-relaxed">
                 At Buds School, we believe every child has unlimited potential waiting to be discovered. 

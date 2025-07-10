@@ -81,7 +81,7 @@ const AdmissionsPage = () => {
             Join the Buds School Family
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed mb-10">
-            Begin your child's educational journey with us. We're accepting applications for the 2025-26
+            Begin your child&apos;s educational journey with us. We&apos;re accepting applications for the 2025-26
             academic year.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -247,7 +247,7 @@ const AdmissionsPage = () => {
         <div className="max-w-5xl mx-auto text-center px-6">
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Begin Your Application?</h2>
           <p className="text-xl text-blue-100 mb-10">
-            Join hundreds of families who have chosen Buds School for their children's educational
+            Join hundreds of families who have chosen Buds School for their child&apos;s educational
             journey.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">

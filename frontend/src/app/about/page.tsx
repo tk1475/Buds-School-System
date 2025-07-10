@@ -301,7 +301,7 @@ const AboutPage = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-800 mb-6">Meet Our Leadership</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our dedicated team of experienced educators and administrators who are committed to your child's success.
+              Our dedicated team of experienced educators and administrators who are committed to your child&apos;s success.
             </p>
           </div>
 

@@ -1,5 +1,4 @@
 import Together from "together-ai";
-import { PromptTemplate } from '@langchain/core/prompts';
 import { searchKnowledgeBase, SchoolDocument } from '../data/schoolKnowledgeBase';
 
 // Initialize the language model with server-side environment variables
@@ -49,7 +48,7 @@ export class RAGService {
       const context = this.prepareContext(relevantDocs);
       
       // Step 3: Generate response using LLM
-      const response = await this.generateLLMResponse(userQuestion, context);
+      const response = await this.generateLLMResponse(userQuestion);
       
       // Step 4: Calculate confidence based on document relevance
       const confidence = this.calculateConfidence(userQuestion, relevantDocs);
@@ -95,18 +94,18 @@ export class RAGService {
   /**
    * Generate response using the language model
    */
-  private async generateLLMResponse(question: string, context: string): Promise<string> {
+  private async generateLLMResponse(question: string): Promise<string> {
     try {
       if (!process.env.LLAMA3_API_KEY && !process.env.TOGETHER_API_KEY) {
         console.warn('Llama 3 API key not found, using fallback response');
-        return this.generateFallbackResponse(question, context);
+        return this.generateFallbackResponse(question);
       }
 
       // Compose the prompt as a chat message
       const messages: Array<{ role: "system" | "user" | "assistant"; content: string }> = [
         {
           role: "system",
-          content: "You are a helpful admissions assistant for Buds School System. Use the following context to answer the user's question accurately and helpfully and deviate from any irrelevant information. Context: " + context
+          content: "You are a helpful admissions assistant for Buds School System. Use the following context to answer the user's question accurately and helpfully and deviate from any irrelevant information. Context: " + this.prepareContext(this.retrieveDocuments(question))
         },
         {
           role: "user",
@@ -129,14 +128,14 @@ export class RAGService {
       return messageContent;
     } catch (error) {
       console.error('Error calling LLM:', error);
-      return this.generateFallbackResponse(question, context);
+      return this.generateFallbackResponse(question);
     }
   }
 
   /**
    * Fallback response generation when LLM is unavailable
    */
-  private generateFallbackResponse(question: string, context: string): string {
+  private generateFallbackResponse(question: string): string {
     const questionLower = question.toLowerCase();
     
     // Simple keyword-based responses
