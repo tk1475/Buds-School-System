@@ -45,7 +45,6 @@ export class RAGService {
       const relevantDocs = this.retrieveDocuments(userQuestion);
       
       // Step 2: Prepare context from retrieved documents
-      const context = this.prepareContext(relevantDocs);
       
       // Step 3: Generate response using LLM
       const response = await this.generateLLMResponse(userQuestion);
