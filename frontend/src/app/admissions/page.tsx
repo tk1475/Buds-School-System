@@ -3,14 +3,12 @@
 import React, { useState } from 'react';
 import {
   GraduationCap,
-  Users,
   BookOpen,
   Calendar,
   FileText,
   Download,
   CheckCircle,
   Clock,
-  DollarSign,
   MessageCircle,
 } from 'lucide-react';
 import Chatbot from '../components/Chatbot'; // Adjust the import path if necessary

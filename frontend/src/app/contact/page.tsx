@@ -7,13 +7,10 @@ import {
   Mail, 
   Clock,
   MessageCircle,
-  CheckCircle,
   AlertCircle
 } from 'lucide-react';
 
 const ContactPage = () => {
-  const [selectedInquiry, setSelectedInquiry] = useState('general');
-
   const contactMethods = [
     {
       icon: MapPin,

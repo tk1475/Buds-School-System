@@ -152,7 +152,7 @@ export const searchKnowledgeBase = (query: string): SchoolDocument[] => {
   const locationKeywords = ['location', 'address', 'where', 'find', 'directions', 'map', 'locate', 'site', 'venue', 'place', 'campus', 'school location', 'directions', 'find', 'place', 'site', 'locate', 'venue'];
   const isLocationQuery = searchTerms.some(term => locationKeywords.includes(term));
 
-  let results = schoolKnowledgeBase.filter(doc => {
+  const results = schoolKnowledgeBase.filter(doc => {
     const contentMatch = searchTerms.some(term => 
       doc.content.toLowerCase().includes(term)
     );

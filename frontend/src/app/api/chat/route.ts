@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { 
         error: 'Internal server error',
-        answer: "I apologize, but I'm having trouble processing your request right now. Please try again or contact our admissions team directly at +92 (51) 123-4567.",
+        answer: "I apologize, but I'm having trouble processing your request right now. Please try again or contact our admissions team directly at 051-5955861.",
         sources: [],
         confidence: 0,
       },

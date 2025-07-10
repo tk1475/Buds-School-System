@@ -5,27 +5,6 @@ import { searchKnowledgeBase, SchoolDocument } from '../data/schoolKnowledgeBase
 // Initialize the language model with server-side environment variables
 const together = new Together(); // auth defaults to process.env.LLAMA3_API_KEY or TOGETHER_API_KEY
 
-// Create a prompt template for the RAG system
-const ragPromptTemplate = PromptTemplate.fromTemplate(`
-System: You are a helpful admissions assistant for Buds School. Use the following context to answer the user's question accurately and helpfully.
-
-Context Information:
-{context}
-
-User Question: {question}
-
-Instructions:
-1. Answer based ONLY on the provided context information
-2. If the context doesn't contain enough information to answer the question, say so and suggest contacting the school directly
-3. Be friendly, professional, and helpful
-4. Keep responses concise but informative
-5. If asked about fees, provide specific amounts from the context
-6. If asked about dates, provide exact dates from the context
-7. If asked about documents, list all required documents from the context
-
-Answer:
-`);
-
 export interface RAGResponse {
   answer: string;
   sources: SchoolDocument[];
@@ -127,7 +106,7 @@ export class RAGService {
       const messages: Array<{ role: "system" | "user" | "assistant"; content: string }> = [
         {
           role: "system",
-          content: "You are a helpful admissions assistant for Buds School. Use the following context to answer the user's question accurately and helpfully. Context: " + context
+          content: "You are a helpful admissions assistant for Buds School System. Use the following context to answer the user's question accurately and helpfully and deviate from any irrelevant information. Context: " + context
         },
         {
           role: "user",

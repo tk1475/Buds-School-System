@@ -2,22 +2,16 @@
 
 import React, { useState } from 'react';
 import { 
-  GraduationCap, 
   Users, 
   BookOpen, 
-  Award, 
   Heart,
   Target,
   Eye,
   ChevronRight,
-  CheckCircle,
   MapPin,
   Phone,
   Mail,
-  Calendar,
-  Globe,
   Star,
-  UserCheck,
   Building,
   Lightbulb,
   Trophy,
@@ -92,7 +86,7 @@ const AboutPage = () => {
       description: "We believe in the power of collaboration and mutual support, creating lasting bonds between students, families, and educators."
     },
     {
-      icon: Globe,
+      icon: Users,
       title: "Global Perspective",
       description: "We prepare students to be global citizens with awareness of diverse cultures and perspectives in our interconnected world."
     }

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, User, X, Minimize2, Maximize2, Send, MessageCircle, Info, BookOpen } from 'lucide-react';
+import { Bot, X, Minimize2, Maximize2, Send, Info, BookOpen } from 'lucide-react';
 
 interface ChatbotProps {
   isOpen: boolean;
